@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/modernist-333023f3-1990-4cd4-b2b1-8c5c0b94f3f3/styles.css">
+<script src="_ds/modernist-333023f3-1990-4cd4-b2b1-8c5c0b94f3f3/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+<style>
+  body { margin: 0; background: #f3f2f2; }
+  h1, h2, h3, h4, .fr h1, .fr h2, .fr h3 { font-family: Montserrat, sans-serif; }
+  a { color: #F40009; }
+  a:hover { color: #1E1E1E; }
+  .fr { width: 390px; height: 844px; position: relative; display: flex; flex-direction: column; overflow: hidden; font-family: Montserrat, sans-serif; }
+  .btn-c { width: 100%; border: 0; padding: 22px 20px; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 17px; line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .btn-c:focus-visible { outline: 2px solid #1E1E1E; outline-offset: 2px; }
+  .num { font-weight: 900; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+</style>
+</helmet>
+
+<section style="display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding: 56px 48px 72px; background: #f3f2f2; color: #1E1E1E; font-family: Montserrat, sans-serif; border-bottom: 2px solid #1E1E1E;">
+  <header style="display: flex; flex-direction: column; gap: 10px; border-bottom: 2px solid #1E1E1E; padding-bottom: 16px; width: 100%; max-width: 620px;">
+    <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #F40009;">Working prototype</div>
+    <h2 style="margin: 0; font-size: 30px; font-weight: 900; line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase;">Tap through it</h2>
+    <p style="margin: 0; font-size: 13px; font-weight: 500; line-height: 1.5;">Every button routes. Matches resolve, the record updates, the counters tick. Static flow board is below.</p>
+  </header>
+
+  <div class="fr" style="background: #ffffff; color: #1E1E1E; box-shadow: 0 0 0 2px #1E1E1E;">
+    <div style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+
+      <sc-if value="{{ atLanding }}" hint-placeholder-val="{{ true }}">
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; background: #F40009; color: #ffffff; padding: 72px 20px 28px;">
+          <h3 style="margin: 0; font-size: 62px; font-weight: 900; line-height: 0.86; letter-spacing: -0.045em; text-transform: uppercase;">Rock.<br>Paper.<br>Scissor.<br>Coke.</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <p style="margin: 0 0 12px; font-size: 15px; font-weight: 700; line-height: 1.4;">Scan your opponent. Play. Log the win.</p>
+            <button class="btn-c" onClick="{{ goRegister }}" style="background: #ffffff; color: #1E1E1E;" style-hover="background:#1E1E1E;color:#ffffff">
+              <span>Create profile</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </button>
+            <button class="btn-c" onClick="{{ goHome }}" style="background: transparent; color: #ffffff; box-shadow: inset 0 0 0 2px #ffffff;" style-hover="background:#ffffff;color:#F40009">
+              <span>I already have one</span>
+            </button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atRegister }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; background: #ffffff; color: #1E1E1E; padding: 56px 20px 28px; gap: 26px;">
+          <h3 style="margin: 0; font-size: 38px; font-weight: 900; line-height: 0.9; letter-spacing: -0.035em; text-transform: uppercase;">Get<br>in.</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button class="btn-c" onClick="{{ authInstagram }}" style="{{ igBtnStyle }}" style-hover="background:#F40009">
+              <span>Continue with Instagram</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+            </button>
+            <button class="btn-c" onClick="{{ authPhone }}" style="{{ phoneBtnStyle }}" style-hover="background:#F40009">
+              <span>Continue with mobile number</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20"></rect><path d="M10 19h4"></path></svg>
+            </button>
+          </div>
+          <div style="height: 2px; background: #1E1E1E;"></div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <label for="live-handle" style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Choose a handle</label>
+            <input id="live-handle" value="{{ liveHandle }}" onChange="{{ setHandle }}" placeholder="@" style="width: 100%; box-sizing: border-box; border: 0; box-shadow: inset 0 0 0 2px #1E1E1E; background: #ffffff; padding: 20px; font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800; color: #1E1E1E;">
+            <p style="margin: 0; font-size: 12px; font-weight: 600; line-height: 1.5; color: #6b6664;">Handles are public on the leaderboard.</p>
+          </div>
+          <div style="flex: 1;"></div>
+          <button class="btn-c" onClick="{{ goHome }}" style="background: #F40009; color: #ffffff; padding: 28px 20px; font-size: 20px;" style-hover="background:#1E1E1E">
+            <span>Lock it in</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atHome }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; background: #F40009; color: #ffffff; padding: 44px 20px 24px; gap: 30px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 56px; height: 56px; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; flex: none;">{{ initial }}</div>
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-size: 22px; font-weight: 900; letter-spacing: -0.02em;">{{ liveHandle }}</span>
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85;">Lagos · Since Mar 26</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid #ffffff; border-bottom: 2px solid #ffffff;">
+            <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 0 20px;">
+              <span class="num" style="font-size: 54px; line-height: 0.85;">{{ wins }}</span>
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Wins</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 0 20px 16px; box-shadow: inset 2px 0 0 #ffffff;">
+              <span class="num" style="font-size: 54px; line-height: 0.85;">{{ losses }}</span>
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Losses</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 0 20px 16px; box-shadow: inset 2px 0 0 #ffffff;">
+              <span class="num" style="font-size: 54px; line-height: 0.85;">{{ streak }}</span>
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Streak</span>
+            </div>
+          </div>
+          <div style="flex: 1;"></div>
+          <button class="btn-c" onClick="{{ goPair }}" style="background: #ffffff; color: #F40009; padding: 34px 20px; font-size: 27px; letter-spacing: -0.02em;" style-hover="background:#1E1E1E;color:#ffffff">
+            <span>Start a match</span>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </button>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.85;">Last three opponents</span>
+            <div style="display: flex; gap: 8px;">
+              <sc-for list="{{ recent }}" as="r" hint-placeholder-count="3">
+                <div style="width: 44px; height: 44px; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900;">{{ r.initial }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atPair }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; background: #ffffff; color: #1E1E1E; padding: 44px 0 28px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid #1E1E1E; border-bottom: 2px solid #1E1E1E; margin-bottom: 26px;">
+            <button class="btn-c" onClick="{{ showMine }}" style="{{ tabMineStyle }}"><span>My code</span></button>
+            <button class="btn-c" onClick="{{ showScan }}" style="{{ tabScanStyle }}"><span>Scan</span></button>
+          </div>
+          <div style="padding: 0 20px; display: flex; flex-direction: column; gap: 22px; flex: 1;">
+            <sc-if value="{{ isMine }}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; flex-direction: column; gap: 22px;">
+                <h3 style="margin: 0; font-size: 32px; font-weight: 900; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase;">Let them<br>scan you.</h3>
+                <div style="box-shadow: inset 0 0 0 2px #1E1E1E; padding: 22px; display: flex; align-items: center; justify-content: center;">{{ qr }}</div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                  <span style="font-size: 18px; font-weight: 900;">{{ liveHandle }}</span>
+                  <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #F40009;">Code live {{ codeClock }}</span>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isScan }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 20px;">
+                <h3 style="margin: 0; font-size: 32px; font-weight: 900; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase;">Scan your<br>opponent.</h3>
+                <div style="position: relative; width: 100%; aspect-ratio: 1; background: #1E1E1E; display: flex; align-items: center; justify-content: center;">
+                  <div style="width: 62%; aspect-ratio: 1; box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35);"></div>
+                  <span style="position: absolute; bottom: 16px; left: 16px; font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75);">Camera</span>
+                </div>
+                <button class="btn-c" onClick="{{ goPaired }}" style="background: #1E1E1E; color: #ffffff; padding: 18px 20px; font-size: 14px;" style-hover="background:#F40009">
+                  <span>Simulate a scan</span>
+                </button>
+              </div>
+            </sc-if>
+            <div style="flex: 1;"></div>
+            <button class="btn-c" onClick="{{ goPaired }}" style="background: transparent; color: #1E1E1E; padding: 0; font-size: 14px; text-decoration: underline; text-underline-offset: 4px;" style-hover="color:#F40009">
+              <span>Enter their handle instead</span>
+            </button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atPaired }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; background: #F40009; color: #ffffff; padding: 64px 20px 28px;">
+          <div style="display: flex; flex-direction: column; gap: 28px;">
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Paired</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;">
+              <div style="aspect-ratio: 1; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 900;">{{ initial }}</div>
+              <span class="num" style="font-size: 34px;">VS</span>
+              <div style="aspect-ratio: 1; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 900;">{{ oppInitial }}</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; border-top: 2px solid #ffffff; padding-top: 12px;">
+              <span style="font-size: 16px; font-weight: 900;">{{ liveHandle }}</span>
+              <span></span>
+              <span style="font-size: 16px; font-weight: 900; text-align: right;">{{ liveOpp }}</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="margin: 0; font-size: 30px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; text-transform: uppercase;">Now play it<br>on the cans.</p>
+            <button class="btn-c" onClick="{{ goUpload }}" style="background: #ffffff; color: #F40009;" style-hover="background:#1E1E1E;color:#ffffff">
+              <span>We're done, log the result</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atUpload }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; color: #1E1E1E; padding: 56px 20px 28px;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <h3 style="margin: 0; font-size: 34px; font-weight: 900; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase;">Both lids<br>in frame.</h3>
+            <div style="position: relative; width: 100%; aspect-ratio: 1; background: #1E1E1E; display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <div style="width: 34%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <div style="width: 42%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.35); border-radius: 50%;"></div>
+              </div>
+              <div style="width: 34%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <div style="width: 42%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.35); border-radius: 50%;"></div>
+              </div>
+              <span style="position: absolute; bottom: 16px; left: 16px; font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75);">Camera</span>
+            </div>
+            <p style="margin: 0; font-size: 12px; font-weight: 600; line-height: 1.5; color: #6b6664;">One photo proves the match. We read the lids, not your faces.</p>
+          </div>
+          <button class="btn-c" onClick="{{ playMatch }}" style="background: #F40009; color: #ffffff; padding: 30px 20px; font-size: 22px;" style-hover="background:#1E1E1E">
+            <span>{{ uploadLabel }}</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20V5M6 11l6-6 6 6"></path></svg>
+          </button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atResult }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; background: #F40009; color: #ffffff; padding: 48px 20px 24px; gap: 24px;">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Winner</span>
+            <span class="num" style="font-size: 52px; line-height: 0.88;">{{ winnerHandle }}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 2px solid #ffffff; border-bottom: 2px solid #ffffff; padding: 22px 0;">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              {{ myMoveIcon }}
+              <div style="display: flex; flex-direction: column;">
+                <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase;">{{ myOutcome }}</span>
+                <span style="font-size: 13px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">{{ myMove }} · {{ liveHandle }}</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              {{ oppMoveIcon }}
+              <div style="display: flex; flex-direction: column;">
+                <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase;">{{ oppOutcome }}</span>
+                <span style="font-size: 13px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">{{ oppMove }} · {{ liveOpp }}</span>
+              </div>
+            </div>
+          </div>
+          <p style="margin: 0; font-size: 26px; font-weight: 900; line-height: 1.05; letter-spacing: -0.025em; text-transform: uppercase;">{{ resultLine }}</p>
+          <div style="flex: 1;"></div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button class="btn-c" onClick="{{ rematch }}" style="background: #ffffff; color: #F40009;" style-hover="background:#1E1E1E;color:#ffffff">
+              <span>Rematch</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"></path></svg>
+            </button>
+            <button class="btn-c" onClick="{{ follow }}" style="background: transparent; color: #ffffff; box-shadow: inset 0 0 0 2px #ffffff; font-size: 15px;" style-hover="background:#ffffff;color:#F40009">
+              <span>{{ followLabel }}</span>
+            </button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atBoard }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; background: #1E1E1E; color: #ffffff; padding: 40px 20px 0; gap: 20px; overflow: hidden;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between;">
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Thrown right now</span>
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Live</span>
+          </div>
+          <div style="display: flex; flex-direction: column; border-top: 2px solid #ffffff;">
+            <sc-for list="{{ throws }}" as="t" hint-placeholder-count="3">
+              <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px; padding: 12px 0; border-bottom: 2px solid rgba(255,255,255,0.22);">
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">{{ t.name }}</span>
+                  <span class="num" style="font-size: 38px; line-height: 1;">{{ t.count }}</span>
+                </div>
+                <span class="num" style="font-size: 26px; color: #F40009;">{{ t.pct }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.65;">Cities · matches today</span>
+            <div style="display: flex; flex-direction: column;">
+              <sc-for list="{{ cities }}" as="c" hint-placeholder-count="5">
+                <div style="display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: baseline; padding: 9px 0; border-bottom: 2px solid rgba(255,255,255,0.16);">
+                  <span class="num" style="font-size: 14px; color: #F40009;">{{ c.rank }}</span>
+                  <span style="font-size: 14px; font-weight: 800; text-transform: uppercase;">{{ c.name }}</span>
+                  <span class="num" style="font-size: 14px;">{{ c.count }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background: #F40009; color: #ffffff; padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;">
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">{{ liveHandle }}</span>
+              <span class="num" style="font-size: 26px; line-height: 1;">{{ recordLine }}</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 2px; text-align: right;">
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Most thrown</span>
+              <span class="num" style="font-size: 20px;">{{ mostThrown }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atProfile }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; background: #ffffff; color: #1E1E1E; padding: 44px 20px 20px; gap: 24px; overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 64px; height: 64px; background: #F40009; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; flex: none;">{{ initial }}</div>
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-size: 24px; font-weight: 900; letter-spacing: -0.02em;">{{ liveHandle }}</span>
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6664;">Record {{ recordLine }} · Streak {{ streak }}</span>
+            </div>
+          </div>
+          <div style="height: 2px; background: #1E1E1E;"></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Match log</span>
+            <div style="display: flex; flex-direction: column;">
+              <sc-for list="{{ history }}" as="h" hint-placeholder-count="3">
+                <div style="display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 2px solid #e2dfde;">
+                  <div style="width: 34px; height: 34px; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900;">{{ h.initial }}</div>
+                  <span style="font-size: 13px; font-weight: 800; text-transform: uppercase;">{{ h.handle }} · {{ h.move }}</span>
+                  <span style="font-size: 11px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: #F40009;">{{ h.outcome }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="flex: 1;"></div>
+          <button class="btn-c" onClick="{{ reset }}" style="background: #1E1E1E; color: #ffffff; font-size: 14px; padding: 18px 20px;" style-hover="background:#F40009">
+            <span>Reset prototype</span>
+          </button>
+        </div>
+      </sc-if>
+
+    </div>
+    <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+      <nav style="display: grid; grid-template-columns: repeat(3, 1fr); flex: none;">
+        <button class="btn-c" onClick="{{ navPlay }}" style="{{ navPlayStyle }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"></path></svg>
+          <span>Play</span>
+        </button>
+        <button class="btn-c" onClick="{{ navBoard }}" style="{{ navBoardStyle }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="12" width="5" height="9"></rect><rect x="10" y="6" width="5" height="15"></rect><rect x="17" y="9" width="5" height="12"></rect></svg>
+          <span>Leaderboard</span>
+        </button>
+        <button class="btn-c" onClick="{{ navProfile }}" style="{{ navProfileStyle }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg>
+          <span>Profile</span>
+        </button>
+      </nav>
+    </sc-if>
+  </div>
+</section>
+
+<section style="display: flex; flex-direction: column; align-items: flex-start; gap: 56px; padding: 56px 48px 96px; background: #f3f2f2; color: #1E1E1E; font-family: Montserrat, sans-serif;">
+
+  <header style="display: flex; flex-direction: column; gap: 14px; max-width: 620px; border-bottom: 2px solid #1E1E1E; padding-bottom: 20px; width: 100%;">
+    <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #F40009;">Mobile web · QR landing · 390 × 844</div>
+    <h1 style="margin: 0; font-size: 40px; font-weight: 900; line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase;">Rock. Paper. Scissor. Coke.</h1>
+    <p style="margin: 0; font-size: 14px; font-weight: 500; line-height: 1.5; max-width: 460px;">Eight screens in flow order. Scan your opponent. Play. Log the win.</p>
+  </header>
+
+  <!-- 01 LANDING -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">01</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Landing</span>
+    </div>
+    <div class="fr" style="background: #F40009; color: #ffffff; justify-content: space-between; padding: 72px 20px 28px;">
+      <h2 style="margin: 0; font-size: 62px; font-weight: 900; line-height: 0.86; letter-spacing: -0.045em; text-transform: uppercase;">Rock.<br>Paper.<br>Scissor.<br>Coke.</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <p style="margin: 0 0 12px; font-size: 15px; font-weight: 700; line-height: 1.4;">Scan your opponent. Play. Log the win.</p>
+        <button class="btn-c" style="background: #ffffff; color: #1E1E1E;" style-hover="background:#1E1E1E;color:#ffffff">
+          <span>Create profile</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </button>
+        <button class="btn-c" style="background: transparent; color: #ffffff; box-shadow: inset 0 0 0 2px #ffffff;" style-hover="background:#ffffff;color:#F40009">
+          <span>I already have one</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 REGISTER -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">02</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Register</span>
+    </div>
+    <div class="fr" style="background: #ffffff; color: #1E1E1E; padding: 56px 20px 28px; gap: 28px;">
+      <h2 style="margin: 0; font-size: 38px; font-weight: 900; line-height: 0.9; letter-spacing: -0.035em; text-transform: uppercase;">Get<br>in.</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <button class="btn-c" style="background: #1E1E1E; color: #ffffff;" style-hover="background:#F40009">
+          <span>Continue with Instagram</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+        </button>
+        <button class="btn-c" style="background: #1E1E1E; color: #ffffff;" style-hover="background:#F40009">
+          <span>Continue with mobile number</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20"></rect><path d="M10 19h4"></path></svg>
+        </button>
+      </div>
+      <div style="height: 2px; background: #1E1E1E;"></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <label for="handle" style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Choose a handle</label>
+        <input id="handle" placeholder="@" style="width: 100%; box-sizing: border-box; border: 0; box-shadow: inset 0 0 0 2px #1E1E1E; background: #ffffff; padding: 20px; font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800; color: #1E1E1E; letter-spacing: -0.01em;">
+        <p style="margin: 0; font-size: 12px; font-weight: 600; line-height: 1.5; color: #6b6664;">Handles are public on the leaderboard.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 HOME -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">03</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Home</span>
+    </div>
+    <div class="fr" style="background: #F40009; color: #ffffff;">
+      <div style="flex: 1; display: flex; flex-direction: column; padding: 44px 20px 24px; gap: 32px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 56px; height: 56px; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; flex: none;">M</div>
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <span style="font-size: 22px; font-weight: 900; letter-spacing: -0.02em;">{{ handle }}</span>
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85;">Lagos · Since Mar 26</span>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid #ffffff; border-bottom: 2px solid #ffffff;">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 0 20px;">
+            <span class="num" style="font-size: 54px; line-height: 0.85;">14</span>
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Wins</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 0 20px 16px; box-shadow: inset 2px 0 0 #ffffff;">
+            <span class="num" style="font-size: 54px; line-height: 0.85;">09</span>
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Losses</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 0 20px 16px; box-shadow: inset 2px 0 0 #ffffff;">
+            <span class="num" style="font-size: 54px; line-height: 0.85;">3</span>
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Streak</span>
+          </div>
+        </div>
+        <div style="flex: 1;"></div>
+        <button class="btn-c" style="background: #ffffff; color: #F40009; padding: 34px 20px; font-size: 27px; letter-spacing: -0.02em;" style-hover="background:#1E1E1E;color:#ffffff">
+          <span>Start a match</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </button>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.85;">Last three opponents</span>
+          <div style="display: flex; gap: 8px;">
+            <div style="width: 44px; height: 44px; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900;">T</div>
+            <div style="width: 44px; height: 44px; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900;">A</div>
+            <div style="width: 44px; height: 44px; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900;">K</div>
+          </div>
+        </div>
+      </div>
+      <nav style="display: grid; grid-template-columns: repeat(3, 1fr); background: #1E1E1E; color: #ffffff; flex: none;">
+        <button class="btn-c" style="background: #F40009; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"></path></svg>
+          <span>Play</span>
+        </button>
+        <button class="btn-c" style="background: #1E1E1E; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px; opacity: 0.6;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="12" width="5" height="9"></rect><rect x="10" y="6" width="5" height="15"></rect><rect x="17" y="9" width="5" height="12"></rect></svg>
+          <span>Leaderboard</span>
+        </button>
+        <button class="btn-c" style="background: #1E1E1E; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px; opacity: 0.6;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg>
+          <span>Profile</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 04 PAIR -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">04</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Pair · two tabs</span>
+    </div>
+    <div class="fr" style="background: #ffffff; color: #1E1E1E; padding: 44px 0 28px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid #1E1E1E; border-bottom: 2px solid #1E1E1E; margin: 0 0 28px;">
+        <button class="btn-c" onClick="{{ showMine }}" style="{{ tabMineStyle }}">
+          <span>My code</span>
+        </button>
+        <button class="btn-c" onClick="{{ showScan }}" style="{{ tabScanStyle }}">
+          <span>Scan</span>
+        </button>
+      </div>
+      <div style="padding: 0 20px; display: flex; flex-direction: column; gap: 24px; flex: 1;">
+        <sc-if value="{{ isMine }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <h2 style="margin: 0; font-size: 32px; font-weight: 900; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase;">Let them<br>scan you.</h2>
+            <div style="background: #ffffff; box-shadow: inset 0 0 0 2px #1E1E1E; padding: 22px; display: flex; align-items: center; justify-content: center;">{{ qr }}</div>
+            <div style="display: flex; align-items: baseline; justify-content: space-between;">
+              <span style="font-size: 18px; font-weight: 900;">{{ handle }}</span>
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #F40009;">Code live 2:00</span>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isScan }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <h2 style="margin: 0; font-size: 32px; font-weight: 900; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase;">Scan your<br>opponent.</h2>
+            <div style="position: relative; width: 100%; aspect-ratio: 1; background: #1E1E1E; display: flex; align-items: center; justify-content: center;">
+              <div style="width: 62%; aspect-ratio: 1; box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35);"></div>
+              <span style="position: absolute; bottom: 16px; left: 16px; font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.7);">Camera</span>
+            </div>
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #F40009;">Hold steady</span>
+          </div>
+        </sc-if>
+        <div style="flex: 1;"></div>
+        <a href="#04" style="font-size: 14px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px;">Enter their handle instead</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 PAIRED -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">05</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Paired</span>
+    </div>
+    <div class="fr" style="background: #F40009; color: #ffffff; padding: 64px 20px 28px; justify-content: space-between;">
+      <div style="display: flex; flex-direction: column; gap: 28px;">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Paired</span>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;">
+          <div style="aspect-ratio: 1; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 900;">M</div>
+          <span class="num" style="font-size: 34px;">VS</span>
+          <div style="aspect-ratio: 1; background: #1E1E1E; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 900;">T</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; border-top: 2px solid #ffffff; padding-top: 12px;">
+          <span style="font-size: 16px; font-weight: 900;">{{ handle }}</span>
+          <span></span>
+          <span style="font-size: 16px; font-weight: 900; text-align: right;">{{ oppHandle }}</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <p style="margin: 0; font-size: 30px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; text-transform: uppercase;">Now play it<br>on the cans.</p>
+        <button class="btn-c" style="background: #ffffff; color: #F40009;" style-hover="background:#1E1E1E;color:#ffffff">
+          <span>We're done, log the result</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 UPLOAD -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">06</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Upload the cheers</span>
+    </div>
+    <div class="fr" style="background: #ffffff; color: #1E1E1E; padding: 56px 20px 28px; justify-content: space-between;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 900; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase;">Both lids<br>in frame.</h2>
+        <div style="position: relative; width: 100%; aspect-ratio: 1; background: #1E1E1E; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <div style="width: 34%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 42%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%;"></div>
+          </div>
+          <div style="width: 34%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 42%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%;"></div>
+          </div>
+          <span style="position: absolute; bottom: 16px; left: 16px; font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.7);">Camera</span>
+        </div>
+        <p style="margin: 0; font-size: 12px; font-weight: 600; line-height: 1.5; color: #6b6664;">One photo proves the match. We read the lids, not your faces.</p>
+      </div>
+      <button class="btn-c" style="background: #F40009; color: #ffffff; padding: 30px 20px; font-size: 22px;" style-hover="background:#1E1E1E">
+        <span>Upload</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20V5M6 11l6-6 6 6"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 07 RESULT -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">07</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Result</span>
+    </div>
+    <div class="fr" style="background: #F40009; color: #ffffff;">
+      <div style="flex: 1; display: flex; flex-direction: column; padding: 48px 20px 24px; gap: 26px;">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Winner</span>
+          <span class="num" style="font-size: 52px; line-height: 0.88;">{{ oppHandle }}</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 2px solid #ffffff; border-bottom: 2px solid #ffffff; padding: 22px 0;">
+          <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+            <svg width="112" height="112" viewBox="0 0 48 48" fill="#ffffff" stroke="#F40009" stroke-width="2.5"><path d="M8 14h22l10 10v20H8z"></path><path d="M30 14v10h10" fill="#F40009" stroke="none"></path><path d="M30 14v10h10"></path></svg>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase;">Won</span>
+              <span style="font-size: 13px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">Paper · {{ oppHandle }}</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+            <svg width="112" height="112" viewBox="0 0 48 48" fill="#ffffff" stroke="none"><path d="M10 30l4-12 10-6 12 4 4 12-6 10H16z"></path></svg>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase;">Lost</span>
+              <span style="font-size: 13px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">Rock · {{ handle }}</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 26px; font-weight: 900; line-height: 1.05; letter-spacing: -0.025em; text-transform: uppercase;">Paper beat rock.</p>
+        <div style="flex: 1;"></div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <button class="btn-c" style="background: #ffffff; color: #F40009;" style-hover="background:#1E1E1E;color:#ffffff">
+            <span>Rematch</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"></path></svg>
+          </button>
+          <button class="btn-c" style="background: transparent; color: #ffffff; box-shadow: inset 0 0 0 2px #ffffff; font-size: 15px;" style-hover="background:#ffffff;color:#F40009">
+            <span>Follow {{ oppHandle }} on Instagram</span>
+          </button>
+        </div>
+      </div>
+      <nav style="display: grid; grid-template-columns: repeat(3, 1fr); background: #1E1E1E; color: #ffffff; flex: none;">
+        <button class="btn-c" style="background: #F40009; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"></path></svg>
+          <span>Play</span>
+        </button>
+        <button class="btn-c" style="background: #1E1E1E; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px; opacity: 0.6;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="12" width="5" height="9"></rect><rect x="10" y="6" width="5" height="15"></rect><rect x="17" y="9" width="5" height="12"></rect></svg>
+          <span>Leaderboard</span>
+        </button>
+        <button class="btn-c" style="background: #1E1E1E; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px; opacity: 0.6;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg>
+          <span>Profile</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 08 LEADERBOARD -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #1E1E1E; padding-bottom: 8px; width: 390px;">
+      <span class="num" style="font-size: 22px; color: #F40009;">08</span>
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Leaderboard</span>
+    </div>
+    <div class="fr" style="background: #1E1E1E; color: #ffffff;">
+      <div style="flex: 1; overflow: hidden; display: flex; flex-direction: column; padding: 40px 20px 0; gap: 22px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between;">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Thrown right now</span>
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Live</span>
+        </div>
+        <div style="display: flex; flex-direction: column; border-top: 2px solid #ffffff;">
+          <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px; padding: 12px 0; border-bottom: 2px solid rgba(255,255,255,0.2);">
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Rock</span>
+              <span class="num" style="font-size: 38px; line-height: 1;">41,208,663</span>
+            </div>
+            <span class="num" style="font-size: 26px; color: #F40009;">38%</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px; padding: 12px 0; border-bottom: 2px solid rgba(255,255,255,0.2);">
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Paper</span>
+              <span class="num" style="font-size: 38px; line-height: 1;">39,914,502</span>
+            </div>
+            <span class="num" style="font-size: 26px; color: #F40009;">36%</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px; padding: 12px 0; border-bottom: 2px solid #ffffff;">
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #F40009;">Scissor</span>
+              <span class="num" style="font-size: 38px; line-height: 1;">28,441,190</span>
+            </div>
+            <span class="num" style="font-size: 26px; color: #F40009;">26%</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6;">Cities · matches today</span>
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ cities }}" as="c" hint-placeholder-count="5">
+              <div style="display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: baseline; padding: 9px 0; border-bottom: 2px solid rgba(255,255,255,0.14);">
+                <span class="num" style="font-size: 14px; color: #F40009;">{{ c.rank }}</span>
+                <span style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em;">{{ c.name }}</span>
+                <span class="num" style="font-size: 14px;">{{ c.count }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background: #F40009; color: #ffffff; padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;">
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">{{ handle }}</span>
+            <span class="num" style="font-size: 26px; line-height: 1;">14–9</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; text-align: right;">
+            <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">Most thrown</span>
+            <span class="num" style="font-size: 20px;">Paper 52%</span>
+          </div>
+        </div>
+      </div>
+      <nav style="display: grid; grid-template-columns: repeat(3, 1fr); background: #000000; color: #ffffff; flex: none;">
+        <button class="btn-c" style="background: #000000; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px; opacity: 0.6;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"></path></svg>
+          <span>Play</span>
+        </button>
+        <button class="btn-c" style="background: #F40009; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="12" width="5" height="9"></rect><rect x="10" y="6" width="5" height="15"></rect><rect x="17" y="9" width="5" height="12"></rect></svg>
+          <span>Leaderboard</span>
+        </button>
+        <button class="btn-c" style="background: #000000; color: #ffffff; justify-content: center; padding: 20px 0 26px; font-size: 11px; letter-spacing: 0.14em; flex-direction: column; gap: 6px; opacity: 0.6;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg>
+          <span>Profile</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;520&quot;,&quot;height&quot;:&quot;1100&quot;},&quot;handle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@mide&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;oppHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@tunde&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = {
+    tab: "mine",
+    screen: "landing",
+    handle: "@mide",
+    opp: "@tunde",
+    auth: null,
+    wins: 14,
+    losses: 9,
+    streak: 3,
+    myMove: "rock",
+    oppMove: "paper",
+    iWon: false,
+    uploading: false,
+    followed: false,
+    clock: 120,
+    history: [],
+    counts: { rock: 41208663, paper: 39914502, scissor: 28441190 }
+  };
+
+  qrCells() {
+    const n = 21, cells = [];
+    let s = 1337;
+    const rnd = () => (s = (s * 1103515245 + 12345) % 2147483648) / 2147483648;
+    const finder = (r, c) => {
+      const zones = [[0, 0], [0, n - 7], [n - 7, 0]];
+      return zones.some(([zr, zc]) => {
+        const dr = r - zr, dc = c - zc;
+        if (dr < 0 || dr > 6 || dc < 0 || dc > 6) return false;
+        const ring = Math.max(Math.abs(dr - 3), Math.abs(dc - 3));
+        return ring === 3 || ring <= 1;
+      });
+    };
+    const inZone = (r, c) =>
+      (r < 7 && c < 7) || (r < 7 && c >= n - 7) || (r >= n - 7 && c < 7);
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        cells.push(inZone(r, c) ? finder(r, c) : rnd() > 0.52);
+    return cells;
+  }
+
+  componentDidMount() {
+    this.tick = setInterval(() => {
+      this.setState(s => ({
+        counts: {
+          rock: s.counts.rock + 400 + Math.floor(Math.random() * 900),
+          paper: s.counts.paper + 380 + Math.floor(Math.random() * 880),
+          scissor: s.counts.scissor + 240 + Math.floor(Math.random() * 700)
+        },
+        clock: s.screen === "pair" ? (s.clock > 0 ? s.clock - 1 : 120) : 120
+      }));
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.tick);
+  }
+
+  go(screen) {
+    this.setState({ screen });
+  }
+
+  moveIcon(move, size) {
+    const c = { width: size, height: size, viewBox: "0 0 48 48", key: move };
+    if (move === "paper")
+      return React.createElement("svg", Object.assign({}, c, { fill: "#ffffff", stroke: "#F40009", strokeWidth: 2.5 }),
+        React.createElement("path", { d: "M8 14h22l10 10v20H8z" }),
+        React.createElement("path", { d: "M30 14v10h10", fill: "#F40009", stroke: "none" }),
+        React.createElement("path", { d: "M30 14v10h10" }));
+    if (move === "rock")
+      return React.createElement("svg", Object.assign({}, c, { fill: "#ffffff" }),
+        React.createElement("path", { d: "M10 30l4-12 10-6 12 4 4 12-6 10H16z" }));
+    return React.createElement("svg", Object.assign({}, c, { fill: "none", stroke: "#ffffff", strokeWidth: 4 }),
+      React.createElement("path", { d: "M14 8l18 24M34 8L16 32" }),
+      React.createElement("circle", { cx: "13", cy: "38", r: "5" }),
+      React.createElement("circle", { cx: "35", cy: "38", r: "5" }));
+  }
+
+  playMatch() {
+    const moves = ["rock", "paper", "scissor"];
+    const beats = { rock: "scissor", paper: "rock", scissor: "paper" };
+    const mine = moves[Math.floor(Math.random() * 3)];
+    let theirs = moves[Math.floor(Math.random() * 3)];
+    if (theirs === mine) theirs = beats[mine];
+    const iWon = beats[mine] === theirs;
+    this.setState({ uploading: true });
+    setTimeout(() => {
+      this.setState(s => {
+        const opp = s.opp;
+        return {
+          uploading: false,
+          screen: "result",
+          myMove: mine,
+          oppMove: theirs,
+          iWon,
+          wins: s.wins + (iWon ? 1 : 0),
+          losses: s.losses + (iWon ? 0 : 1),
+          streak: iWon ? s.streak + 1 : 0,
+          history: [
+            { handle: opp, move: mine, outcome: iWon ? "Won" : "Lost", initial: opp.replace("@", "").charAt(0).toUpperCase() }
+          ].concat(s.history)
+        };
+      });
+    }, 700);
+  }
+
+  appVals() {
+    const s = this.state;
+    const nextOpps = ["@tunde", "@amaka", "@kofi", "@rui", "@dayo"];
+    const handle = s.handle;
+    const opp = s.opp;
+    const beatLine = { rock: "Rock crushed scissor.", paper: "Paper covered rock.", scissor: "Scissor cut paper." };
+    const winMove = s.iWon ? s.myMove : s.oppMove;
+    const total = s.counts.rock + s.counts.paper + s.counts.scissor;
+    const pct = n => Math.round((n / total) * 100) + "%";
+    const fmt = n => n.toLocaleString("en-US");
+    const cap = w => w.charAt(0).toUpperCase() + w.slice(1);
+    const navOn = "background:#F40009;color:#ffffff;justify-content:center;padding:20px 0 26px;font-size:11px;letter-spacing:0.14em;flex-direction:column;gap:6px";
+    const navOff = "background:#1E1E1E;color:#ffffff;justify-content:center;padding:20px 0 26px;font-size:11px;letter-spacing:0.14em;flex-direction:column;gap:6px;opacity:0.62";
+    const authOn = "background:#F40009;color:#ffffff";
+    const authOff = "background:#1E1E1E;color:#ffffff";
+    const moveTally = {};
+    s.history.forEach(h => { moveTally[h.move] = (moveTally[h.move] || 0) + 1; });
+    const top = Object.keys(moveTally).sort((a, b) => moveTally[b] - moveTally[a])[0];
+    const mostThrown = top
+      ? cap(top) + " " + Math.round((moveTally[top] / s.history.length) * 100) + "%"
+      : "Paper 52%";
+    const recent = s.history.length
+      ? s.history.slice(0, 3)
+      : [{ initial: "T" }, { initial: "A" }, { initial: "K" }];
+    const seedLog = [
+      { handle: "@amaka", move: "scissor", outcome: "Won", initial: "A" },
+      { handle: "@kofi", move: "paper", outcome: "Won", initial: "K" },
+      { handle: "@rui", move: "rock", outcome: "Lost", initial: "R" }
+    ];
+    return {
+      atLanding: s.screen === "landing",
+      atRegister: s.screen === "register",
+      atHome: s.screen === "home",
+      atPair: s.screen === "pair",
+      atPaired: s.screen === "paired",
+      atUpload: s.screen === "upload",
+      atResult: s.screen === "result",
+      atBoard: s.screen === "board",
+      atProfile: s.screen === "profile",
+      showNav: ["home", "result", "board", "profile"].indexOf(s.screen) > -1,
+      navPlayStyle: ["home", "pair", "paired", "upload", "result"].indexOf(s.screen) > -1 ? navOn : navOff,
+      navBoardStyle: s.screen === "board" ? navOn : navOff,
+      navProfileStyle: s.screen === "profile" ? navOn : navOff,
+      navPlay: () => this.go("home"),
+      navBoard: () => this.go("board"),
+      navProfile: () => this.go("profile"),
+      goRegister: () => this.go("register"),
+      goHome: () => this.go("home"),
+      goPair: () => this.setState({ screen: "pair", tab: "mine", clock: 120 }),
+      goPaired: () => this.setState({ screen: "paired", opp: nextOpps[Math.floor(Math.random() * nextOpps.length)] }),
+      goUpload: () => this.go("upload"),
+      playMatch: () => this.playMatch(),
+      rematch: () => this.setState({ screen: "pair", tab: "mine", clock: 120 }),
+      follow: () => this.setState({ followed: true }),
+      reset: () => this.setState({ screen: "landing", wins: 14, losses: 9, streak: 3, history: [], followed: false }),
+      authInstagram: () => this.setState({ auth: "ig" }),
+      authPhone: () => this.setState({ auth: "phone" }),
+      igBtnStyle: s.auth === "ig" ? authOn : authOff,
+      phoneBtnStyle: s.auth === "phone" ? authOn : authOff,
+      setHandle: e => {
+        const v = e.target.value;
+        this.setState({ handle: v.charAt(0) === "@" ? v : "@" + v });
+      },
+      liveHandle: handle,
+      liveOpp: opp,
+      initial: handle.replace("@", "").charAt(0).toUpperCase() || "?",
+      oppInitial: opp.replace("@", "").charAt(0).toUpperCase(),
+      wins: String(s.wins).padStart(2, "0"),
+      losses: String(s.losses).padStart(2, "0"),
+      streak: String(s.streak),
+      recordLine: s.wins + "–" + s.losses,
+      recent,
+      history: s.history.length ? s.history : seedLog,
+      mostThrown,
+      uploadLabel: s.uploading ? "Reading lids…" : "Upload",
+      codeClock: Math.floor(s.clock / 60) + ":" + String(s.clock % 60).padStart(2, "0"),
+      myMove: cap(s.myMove),
+      oppMove: cap(s.oppMove),
+      myMoveIcon: this.moveIcon(s.myMove, 104),
+      oppMoveIcon: this.moveIcon(s.oppMove, 104),
+      myOutcome: s.iWon ? "Won" : "Lost",
+      oppOutcome: s.iWon ? "Lost" : "Won",
+      winnerHandle: s.iWon ? handle : opp,
+      resultLine: beatLine[winMove],
+      followLabel: s.followed ? "Following " + opp : "Follow " + opp + " on Instagram",
+      throws: [
+        { name: "Rock", count: fmt(s.counts.rock), pct: pct(s.counts.rock) },
+        { name: "Paper", count: fmt(s.counts.paper), pct: pct(s.counts.paper) },
+        { name: "Scissor", count: fmt(s.counts.scissor), pct: pct(s.counts.scissor) }
+      ]
+    };
+  }
+
+  renderVals() {
+    const tab = this.state.tab;
+    const on = "background:#1E1E1E;color:#ffffff;justify-content:center;padding:16px 0;font-size:12px;letter-spacing:0.14em";
+    const off = "background:#ffffff;color:#1E1E1E;justify-content:center;padding:16px 0;font-size:12px;letter-spacing:0.14em;box-shadow:inset 2px 0 0 #1E1E1E";
+    const qr = React.createElement(
+      "div",
+      {
+        style: {
+          display: "grid",
+          gridTemplateColumns: "repeat(21, 1fr)",
+          width: "100%",
+          aspectRatio: "1",
+          gap: 0
+        }
+      },
+      this.qrCells().map((v, i) =>
+        React.createElement("div", {
+          key: i,
+          style: { background: v ? "#1E1E1E" : "transparent" }
+        })
+      )
+    );
+    return {
+      ...this.appVals(),
+      handle: this.props.handle ?? "@mide",
+      oppHandle: this.props.oppHandle ?? "@tunde",
+      isMine: tab === "mine",
+      isScan: tab === "scan",
+      tabMineStyle: tab === "mine" ? on : off,
+      tabScanStyle: tab === "scan" ? on : off,
+      showMine: () => this.setState({ tab: "mine" }),
+      showScan: () => this.setState({ tab: "scan" }),
+      qr,
+      cities: [
+        { rank: "01", name: "Mexico City", count: "2,441,908" },
+        { rank: "02", name: "Lagos", count: "1,980,552" },
+        { rank: "03", name: "Jakarta", count: "1,744,301" },
+        { rank: "04", name: "São Paulo", count: "1,602,117" },
+        { rank: "05", name: "Manila", count: "1,488,930" },
+        { rank: "06", name: "Atlanta", count: "1,203,466" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
