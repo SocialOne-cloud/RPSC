@@ -31,7 +31,7 @@ export default function CameraPreview({ children }) {
   return (
     <div style={{ position: 'relative', width: '100%', aspectRatio: '1', background: '#1E1E1E', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, overflow: 'hidden' }}>
       <video ref={videoRef} muted playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-      <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: 10 }}>{children}</div>
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', width: '100%', justifyContent: 'center', gap: 10 }}>{children}</div>
       <span style={{ position: 'absolute', bottom: 16, left: 16, fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: error ? '#F40009' : 'rgba(255,255,255,0.75)', zIndex: 1 }}>
         {error ? 'Camera blocked' : 'Camera'}
       </span>

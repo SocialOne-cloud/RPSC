@@ -9,8 +9,18 @@ const BEATS = { rock: 'scissor', paper: 'rock', scissor: 'paper' }
 
 function LidGuide() {
   return (
-    <div style={{ width: '34%', aspectRatio: '1', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ width: '42%', aspectRatio: '1', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '50%' }} />
+    <div
+      style={{
+        width: '34%',
+        aspectRatio: '1',
+        borderRadius: '50%',
+        boxShadow: '0 0 0 3px rgba(255,255,255,0.95), 0 0 0 9999px rgba(0,0,0,0.5)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div style={{ width: '42%', aspectRatio: '1', borderRadius: '50%', boxShadow: 'inset 0 0 0 3px rgba(255,255,255,0.95)' }} />
     </div>
   )
 }
