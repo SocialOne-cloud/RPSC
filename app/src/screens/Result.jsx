@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../state/AppContext'
 import MoveIcon from '../components/MoveIcon'
-import IconCircle from '../components/IconCircle'
 import BottomNav from '../components/BottomNav'
 import { RefreshIcon } from '../components/icons'
 
@@ -37,18 +36,14 @@ export default function Result() {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, borderTop: '2px solid #ffffff', borderBottom: '2px solid #ffffff', padding: '22px 0' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <IconCircle size={104}>
-              <MoveIcon move={match.myMove} size={56} />
-            </IconCircle>
+            <MoveIcon move={match.myMove} size={104} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{match.iWon ? 'Won' : 'Lost'}</span>
               <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase' }}>{cap(match.myMove)} · {profile.handle}</span>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <IconCircle size={104}>
-              <MoveIcon move={match.oppMove} size={56} />
-            </IconCircle>
+            <MoveIcon move={match.oppMove} size={104} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{match.iWon ? 'Lost' : 'Won'}</span>
               <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase' }}>{cap(match.oppMove)} · {oppHandle}</span>

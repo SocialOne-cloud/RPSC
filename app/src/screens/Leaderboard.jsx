@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useApp } from '../state/AppContext'
 import BottomNav from '../components/BottomNav'
-import IconCircle from '../components/IconCircle'
 import MoveIcon from '../components/MoveIcon'
 
 const CITIES = [
@@ -57,9 +56,7 @@ export default function Leaderboard() {
         <div style={{ display: 'flex', flexDirection: 'column', borderTop: '2px solid #ffffff' }}>
           {throws.map((t, i) => (
             <div key={t.name} style={{ display: 'grid', gridTemplateColumns: '40px 1fr auto', alignItems: 'center', gap: 10, padding: '12px 0', borderBottom: i === throws.length - 1 ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0.22)' }}>
-              <IconCircle size={40}>
-                <MoveIcon move={t.move} size={22} />
-              </IconCircle>
+              <MoveIcon move={t.move} size={40} />
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#F40009' }}>{t.name}</span>
                 <span className="num" style={{ fontSize: 38, lineHeight: 1 }}>{fmt(t.count)}</span>

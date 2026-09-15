@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 /* Display face — the "ROCK. PAPER. SCISSOR." logotype only, per the design spec. */
 @font-face {
@@ -44,13 +44,6 @@ button, input {
 .disp {
   font-family: 'Chelt', 'Poppins', sans-serif;
   font-weight: 700;
-}
-
-.script {
-  font-family: 'Pacifico', cursive;
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
 }
 
 @keyframes orbit-group { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
