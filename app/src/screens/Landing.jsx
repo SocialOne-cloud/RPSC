@@ -2,25 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useApp } from '../state/AppContext'
 import { ArrowRight } from '../components/icons'
 import { FistIcon, PalmIcon, PeaceIcon } from '../components/HandIcon'
-
-function IconCircle({ children, size }) {
-  return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        borderRadius: '50%',
-        boxShadow: 'inset 0 0 0 3px #ffffff',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 'none',
-      }}
-    >
-      {children}
-    </div>
-  )
-}
+import IconCircle from '../components/IconCircle'
 
 export default function Landing() {
   const navigate = useNavigate()
@@ -37,14 +19,20 @@ export default function Landing() {
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
           <IconCircle size={92}>
-            <FistIcon size={50} />
+            <div className="spin-cw" style={{ display: 'flex' }}>
+              <FistIcon size={50} />
+            </div>
           </IconCircle>
           <div style={{ display: 'flex', gap: 14 }}>
             <IconCircle size={92}>
-              <PalmIcon size={50} />
+              <div className="spin-ccw" style={{ display: 'flex' }}>
+                <PalmIcon size={50} />
+              </div>
             </IconCircle>
             <IconCircle size={92}>
-              <PeaceIcon size={50} />
+              <div className="spin-cw" style={{ display: 'flex', animationDuration: '9.5s' }}>
+                <PeaceIcon size={50} />
+              </div>
             </IconCircle>
           </div>
         </div>

@@ -52,6 +52,16 @@ button, input {
   letter-spacing: 0;
 }
 
+@keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+.spin-cw { animation: spin-cw 7s linear infinite; }
+.spin-ccw { animation: spin-ccw 8.5s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-cw, .spin-ccw { animation: none; }
+}
+
 .btn-c {
   width: 100%;
   border: 0;
