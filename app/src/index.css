@@ -52,14 +52,14 @@ button, input {
   letter-spacing: 0;
 }
 
-@keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+@keyframes orbit-group { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes orbit-counter { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 
-.spin-cw { animation: spin-cw 7s linear infinite; }
-.spin-ccw { animation: spin-ccw 8.5s linear infinite; }
+.orbit-group { animation: orbit-group 16s linear infinite; }
+.orbit-counter { animation: orbit-counter 16s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .spin-cw, .spin-ccw { animation: none; }
+  .orbit-group, .orbit-counter { animation: none; }
 }
 
 .btn-c {

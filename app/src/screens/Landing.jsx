@@ -11,29 +11,27 @@ export default function Landing() {
   return (
     <div className="screen" style={{ justifyContent: 'space-between', background: '#F40009', color: '#ffffff', padding: '56px 20px 28px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-        <h1 className="headline" style={{ margin: 0, fontSize: 52, fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
+        <h1 className="headline" style={{ margin: 0, fontSize: 54, fontWeight: 700, lineHeight: 0.92, letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
           Rock.<br />Paper.<br />Scissor.
           <br />
           <span className="script" style={{ fontSize: 60, lineHeight: 1 }}>Coke</span>
         </h1>
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-          <IconCircle size={92}>
-            <div className="spin-cw" style={{ display: 'flex' }}>
-              <FistIcon size={50} />
-            </div>
-          </IconCircle>
-          <div style={{ display: 'flex', gap: 14 }}>
-            <IconCircle size={92}>
-              <div className="spin-ccw" style={{ display: 'flex' }}>
-                <PalmIcon size={50} />
+        <div style={{ position: 'relative', width: 198, height: 198, margin: '0 auto' }}>
+          <div className="orbit-group" style={{ position: 'absolute', inset: 0 }}>
+            {[
+              { Icon: FistIcon, top: 46, left: 99 },
+              { Icon: PalmIcon, top: 152, left: 46 },
+              { Icon: PeaceIcon, top: 152, left: 152 },
+            ].map(({ Icon, top, left }, i) => (
+              <div key={i} style={{ position: 'absolute', top, left, transform: 'translate(-50%, -50%)' }}>
+                <div className="orbit-counter">
+                  <IconCircle size={92}>
+                    <Icon size={50} />
+                  </IconCircle>
+                </div>
               </div>
-            </IconCircle>
-            <IconCircle size={92}>
-              <div className="spin-cw" style={{ display: 'flex', animationDuration: '9.5s' }}>
-                <PeaceIcon size={50} />
-              </div>
-            </IconCircle>
+            ))}
           </div>
         </div>
       </div>
