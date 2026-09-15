@@ -48,7 +48,7 @@ export default function Upload() {
   return (
     <div className="screen" style={{ justifyContent: 'space-between', background: '#ffffff', color: '#1E1E1E', padding: '56px 20px 28px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <h2 style={{ margin: 0, fontSize: 34, fontWeight: 900, lineHeight: 0.92, letterSpacing: '-0.035em', textTransform: 'uppercase' }}>
+        <h2 className="headline" style={{ margin: 0, fontSize: 34, fontWeight: 900, lineHeight: 0.92, letterSpacing: '-0.035em', textTransform: 'uppercase' }}>
           Both lids<br />in frame.
         </h2>
         <CameraPreview>

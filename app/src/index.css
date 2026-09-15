@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Pacifico&display=swap');
+
+@font-face {
+  font-family: 'Cheltenham Ex Cond';
+  src: url('./assets/fonts/Cheltenham-ExtraCondensed-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 * { box-sizing: border-box; }
 
@@ -30,6 +38,18 @@ button, input {
   font-weight: 900;
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
+}
+
+.headline {
+  font-family: 'Cheltenham Ex Cond', 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.script {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .btn-c {

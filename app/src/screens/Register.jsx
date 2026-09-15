@@ -20,7 +20,7 @@ export default function Register() {
 
   return (
     <div className="screen" style={{ background: '#ffffff', color: '#1E1E1E', padding: '56px 20px 28px', gap: 26 }}>
-      <h2 style={{ margin: 0, fontSize: 38, fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.035em', textTransform: 'uppercase' }}>
+      <h2 className="headline" style={{ margin: 0, fontSize: 38, fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.035em', textTransform: 'uppercase' }}>
         Get<br />in.
       </h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
