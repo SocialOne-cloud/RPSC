@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Pacifico&display=swap');
 
+/* Display face — the "ROCK. PAPER. SCISSOR." logotype only, per the design spec. */
 @font-face {
-  font-family: 'Cheltenham Ex Cond';
+  font-family: 'Chelt';
   src: url('./assets/fonts/Cheltenham-ExtraCondensed-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 * { box-sizing: border-box; }
@@ -15,13 +16,13 @@ html, body, #root { height: 100%; }
 body {
   margin: 0;
   background: #1E1E1E;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #1E1E1E;
   -webkit-font-smoothing: antialiased;
 }
 
 button, input {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .screen {
@@ -35,13 +36,13 @@ button, input {
 }
 
 .num {
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
 
-.headline {
-  font-family: 'Cheltenham Ex Cond', 'Montserrat', sans-serif;
+.disp {
+  font-family: 'Chelt', 'Poppins', sans-serif;
   font-weight: 700;
 }
 
@@ -66,7 +67,7 @@ button, input {
   width: 100%;
   border: 0;
   padding: 22px 20px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 900;
   font-size: 17px;
   line-height: 1;
@@ -101,7 +102,7 @@ button, input {
 .btn-white-red { background: #ffffff; color: #F40009; }
 .btn-white-red:hover:not(:disabled) { background: #1E1E1E; color: #ffffff; }
 
-.btn-underline { background: transparent; color: #1E1E1E; padding: 0; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; justify-content: flex-start; }
+.btn-underline { background: transparent; color: #1E1E1E; padding: 0; font-size: 14px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; justify-content: flex-start; text-transform: none; }
 .btn-underline:hover:not(:disabled) { color: #F40009; }
 
 .tab-active { background: #1E1E1E; color: #ffffff; justify-content: center; padding: 16px 0; font-size: 12px; letter-spacing: 0.14em; }

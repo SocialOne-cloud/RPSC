@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useApp } from '../state/AppContext'
 import BottomNav from '../components/BottomNav'
+import IconCircle from '../components/IconCircle'
+import MoveIcon from '../components/MoveIcon'
 
 const CITIES = [
   { rank: '01', name: 'Mexico City', count: '2,441,908' },
@@ -32,9 +34,9 @@ export default function Leaderboard() {
   const total = counts.rock + counts.paper + counts.scissor
   const pct = n => Math.round((n / total) * 100) + '%'
   const throws = [
-    { name: 'Rock', count: counts.rock },
-    { name: 'Paper', count: counts.paper },
-    { name: 'Scissor', count: counts.scissor },
+    { name: 'Rock', move: 'rock', count: counts.rock },
+    { name: 'Paper', move: 'paper', count: counts.paper },
+    { name: 'Scissor', move: 'scissor', count: counts.scissor },
   ]
 
   const moveTally = {}
@@ -54,7 +56,10 @@ export default function Leaderboard() {
 
         <div style={{ display: 'flex', flexDirection: 'column', borderTop: '2px solid #ffffff' }}>
           {throws.map((t, i) => (
-            <div key={t.name} style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'end', gap: 8, padding: '12px 0', borderBottom: i === throws.length - 1 ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0.2)' }}>
+            <div key={t.name} style={{ display: 'grid', gridTemplateColumns: '40px 1fr auto', alignItems: 'center', gap: 10, padding: '12px 0', borderBottom: i === throws.length - 1 ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0.22)' }}>
+              <IconCircle size={40}>
+                <MoveIcon move={t.move} size={22} />
+              </IconCircle>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#F40009' }}>{t.name}</span>
                 <span className="num" style={{ fontSize: 38, lineHeight: 1 }}>{fmt(t.count)}</span>

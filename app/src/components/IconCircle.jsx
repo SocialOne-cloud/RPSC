@@ -5,7 +5,7 @@ export default function IconCircle({ children, size }) {
         width: size,
         height: size,
         borderRadius: '50%',
-        boxShadow: 'inset 0 0 0 3px #ffffff',
+        boxShadow: 'inset 0 0 0 2px #ffffff',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

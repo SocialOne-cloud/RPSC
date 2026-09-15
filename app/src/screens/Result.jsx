@@ -56,7 +56,7 @@ export default function Result() {
           </div>
         </div>
 
-        <p className="headline" style={{ margin: 0, fontSize: 26, fontWeight: 700, lineHeight: 1.02, letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
+        <p style={{ margin: 0, fontSize: 26, fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.025em', textTransform: 'uppercase' }}>
           {BEAT_LINE[winMove]}
         </p>
 

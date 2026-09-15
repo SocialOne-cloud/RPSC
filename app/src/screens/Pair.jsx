@@ -112,7 +112,7 @@ export default function Pair() {
       <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: 22, flex: 1 }}>
         {tab === 'mine' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <h2 className="headline" style={{ margin: 0, fontSize: 32, fontWeight: 700, lineHeight: 0.94, letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
+            <h2 style={{ margin: 0, fontSize: 32, fontWeight: 900, lineHeight: 0.92, letterSpacing: '-0.035em', textTransform: 'uppercase' }}>
               Let them<br />scan you.
             </h2>
             <div style={{ boxShadow: 'inset 0 0 0 2px #1E1E1E', padding: 22, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -129,7 +129,7 @@ export default function Pair() {
 
         {tab === 'scan' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-            <h2 className="headline" style={{ margin: 0, fontSize: 32, fontWeight: 700, lineHeight: 0.94, letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
+            <h2 style={{ margin: 0, fontSize: 32, fontWeight: 900, lineHeight: 0.92, letterSpacing: '-0.035em', textTransform: 'uppercase' }}>
               Scan your<br />opponent.
             </h2>
             <CameraScanner key={scanKey} active={tab === 'scan'} onDetect={handleDetect} />

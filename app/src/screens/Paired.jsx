@@ -28,7 +28,7 @@ export default function Paired() {
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <p className="headline" style={{ margin: 0, fontSize: 30, fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
+        <p style={{ margin: 0, fontSize: 30, fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em', textTransform: 'uppercase' }}>
           Now play it<br />on the cans.
         </p>
         <button className="btn-c btn-white-red" onClick={() => navigate('/upload')}>
