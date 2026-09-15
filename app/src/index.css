@@ -41,9 +41,17 @@ button, input {
   font-variant-numeric: tabular-nums;
 }
 
+/* Every headline. The face ships ONE weight (700) — never ask for 900 here or
+   the browser synthesises it and the condensed serif goes muddy. Condensed
+   letterforms also want a touch of air rather than the negative tracking a
+   grotesque needs. Sizes are set per headline and scale fluidly 320–430px. */
 .disp {
   font-family: 'Chelt', 'Poppins', sans-serif;
   font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
 }
 
 @keyframes orbit-group { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }

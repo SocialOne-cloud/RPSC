@@ -51,7 +51,7 @@ export default function Result() {
           </div>
         </div>
 
-        <p style={{ margin: 0, fontSize: 26, fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.025em', textTransform: 'uppercase' }}>
+        <p className="disp" style={{ margin: 0, fontSize: 'clamp(28px, 9.5vw, 40px)', lineHeight: 0.95 }}>
           {BEAT_LINE[winMove]}
         </p>
 

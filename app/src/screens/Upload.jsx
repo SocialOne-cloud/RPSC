@@ -7,6 +7,11 @@ import { UploadIcon } from '../components/icons'
 const MOVES = ['rock', 'paper', 'scissor']
 const BEATS = { rock: 'scissor', paper: 'rock', scissor: 'paper' }
 
+// A white ring backed by a thin dark halo so it reads on any scene. Note: no
+// full-bleed scrim here — two overlapping spread shadows paint over each other
+// and the first guide comes out dimmer than the second.
+const RING = '0 0 0 3px rgba(255,255,255,0.95), 0 0 0 5px rgba(0,0,0,0.28)'
+
 function LidGuide() {
   return (
     <div
@@ -14,13 +19,13 @@ function LidGuide() {
         width: '34%',
         aspectRatio: '1',
         borderRadius: '50%',
-        boxShadow: '0 0 0 3px rgba(255,255,255,0.95), 0 0 0 9999px rgba(0,0,0,0.5)',
+        boxShadow: RING,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      <div style={{ width: '42%', aspectRatio: '1', borderRadius: '50%', boxShadow: 'inset 0 0 0 3px rgba(255,255,255,0.95)' }} />
+      <div style={{ width: '42%', aspectRatio: '1', borderRadius: '50%', boxShadow: RING }} />
     </div>
   )
 }
@@ -48,7 +53,7 @@ export default function Upload() {
   return (
     <div className="screen" style={{ justifyContent: 'space-between', background: '#ffffff', color: '#1E1E1E', padding: '56px 20px 28px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <h2 style={{ margin: 0, fontSize: 34, fontWeight: 900, lineHeight: 0.92, letterSpacing: '-0.035em', textTransform: 'uppercase' }}>
+        <h2 className="disp" style={{ margin: 0, fontSize: 'clamp(36px, 12vw, 50px)' }}>
           Both lids<br />in frame.
         </h2>
         <CameraPreview>

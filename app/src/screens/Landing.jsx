@@ -22,7 +22,7 @@ export default function Landing() {
   return (
     <div className="screen" style={{ justifyContent: 'space-between', background: '#F40009', color: '#ffffff', padding: '56px 20px 28px' }}>
       <div>
-        <h1 className="disp" style={{ margin: 0, fontSize: 62, lineHeight: 0.84, letterSpacing: '0.005em', textTransform: 'uppercase' }}>
+        <h1 className="disp" style={{ margin: 0, fontSize: 'clamp(48px, 16vw, 68px)', lineHeight: 0.84 }}>
           Rock.<br />Paper.<br />Scissor.
         </h1>
         <img src={coke} alt="Coke" style={{ display: 'block', width: 152, height: 'auto', marginTop: 10 }} />
